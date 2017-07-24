@@ -1,0 +1,21 @@
+name: ${name}
+version: ${version}
+description: ${description}
+author: ${author}
+website: ${url}
+
+main: ${mainClass}
+
+commands:
+  painting:
+    description: Places specific paintings.
+    
+    usage: |
+      §8§m----------------------------------§r
+      §8(§5Paintings§8)§e Help Documentation
+      §8(§5Paintings§8)§6   /painting select <name>
+      §8(§5Paintings§8)§6   /painting cancel
+      §8(§5Paintings§8)§6   /painting list
+      §8§m----------------------------------§r
+    
+    permission: openpaintings.basic
