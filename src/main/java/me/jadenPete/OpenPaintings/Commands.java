@@ -37,58 +37,16 @@ public class Commands implements CommandExecutor {
 			// Variable for the player who executed the command,
 			Player player = (Player) sender;
 			
-			// If an argument is specified, carry on with the command.
-			// Otherwise return false and show the command's usage.
-			if(args.length > 0){
-				// Parse the sub-command.
-				switch(args[0]){
-					case "select":{
-						// Carry on with the sub-command if a painting is specified.
-						// Otherwise return false and show the command's usage.
-						if(args.length == 2){
-							if(!args[1].matches("[a-zA-Z]+")){
-								return false;
-							}
-						} else {
-							return false;
-						}
-						
-						Util.selectPainting(player, args);
-						
-						break;
-					}
-					
-					case "cancel":{
-						// Carry on with the sub-command if no arguments are specified.
-						// Otherwise return false and show the command's usage.
-						if(args.length != 1){
-							return false;
-						}
-						
-						Util.cancelSelection(player);
-						
-						break;
-					}
-					
-					case "list":{
-						// Carry on with the sub-command if no arguments are specified.
-						// Otherwise return false and show the command's usage.
-						if(args.length != 1){
-							return false;
-						}
-						
-						Util.listPaintings(player);
-						
-						break;
-					}
-					
-					default:{
-						return false;
-					}
-				}
+			if(args.length == 2 && args[0].equalsIgnoreCase("select")) { //select a painting if given the proper arguments
+			  Util.selectPainting(player, args);
+			} else if(args.length == 1 && args[0].equalsIgnoreCase("cancel")) { //cancel the placement of a painting when given the proper arguments
+			  Util.cancelSelection(player);
+			} else if(args.length == 1 && args[0].equalsIgnoreCase("list")) { //list the painting options when given the proper arguments
+			  Util.listPaintings(player);
 			} else {
-				return false;
-			}	
+			  return false; //return the command's usage if command arguments are invalid
+			}
+			
 		} else {
 			sender.sendMessage(config.getString("messages.non-player"));
 		}

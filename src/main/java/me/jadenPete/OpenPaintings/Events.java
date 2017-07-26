@@ -3,6 +3,7 @@ package me.jadenPete.OpenPaintings;
 import org.bukkit.Art;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Painting;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.hanging.HangingPlaceEvent;
@@ -29,39 +30,30 @@ public class Events implements Listener {
 	// When the player places a painting or item frame.
 	@EventHandler
 	public void onHangingPlace(HangingPlaceEvent event){
-		// Make sure that the entity is a painting.
-		if(event.getEntity() instanceof Painting){
-			int index = Util.getSelection(event.getPlayer().getName());
-			
-			// If the player that placed it has a selection.
-			if(index != -1){
-				Painting painting = (Painting) event.getEntity();
-				Art selection = (Art) Util.selections.get(index).get(1);
-				
-				painting.setArt(selection);
-				
-				// Tell the player if the painting was placed.
-				// If the painting wasn't placed successfully,
-				// assume that it was too large to be placed.
-				if(painting.getArt() == selection){
-					event.getPlayer().sendMessage(config.getString("messages.place"));
-					
-					Util.selections.remove(index);
-				} else {
-					event.getPlayer().sendMessage(config.getString("messages.place-error"));
-				}
-			}
-		}
+	  
+	  if(event.getEntity() instanceof Painting && Util.playerHasSelection(event.getPlayer())) {
+	    
+	    Player player = event.getPlayer();
+	    Painting painting = (Painting)event.getEntity();
+	    Art selection = Util.getSelection(player);
+	    painting.setArt(selection);
+	    
+      // Tell the player if the painting was placed.
+      // If the painting wasn't placed successfully,
+      // assume that it was too large to be placed.
+      if(painting.getArt() == selection){
+        player.sendMessage(config.getString("messages.place"));
+        Util.discardOldestSelection(player);
+      } else {
+        player.sendMessage(config.getString("messages.place-error"));
+      }	    
+	    
+	  }
 	}
 	
 	// When a player disconnects.
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
-		int index = Util.getSelection(event.getPlayer().getName());
-		
-		// If the player has a selection, remove it.
-		if(index != -1){
-			Util.selections.remove(index);
-		}
+		Util.cancelAllSelections(event.getPlayer());
 	}
 }
