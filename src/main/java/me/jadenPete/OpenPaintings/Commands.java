@@ -39,8 +39,10 @@ public class Commands implements CommandExecutor {
 			
 			if(args.length == 2 && args[0].equalsIgnoreCase("select")) { //select a painting if given the proper arguments
 			  Util.selectPainting(player, args);
-			} else if(args.length == 1 && args[0].equalsIgnoreCase("cancel")) { //cancel the placement of a painting when given the proper arguments
-			  Util.cancelSelection(player);
+			} else if(args.length == 1 && args[0].equalsIgnoreCase("remove")) { //cancel the placement of a painting when given the proper arguments
+			  Util.removeSelection(player);
+			} else if(args.length == 1 && args[0].equalsIgnoreCase("cancel")) {
+			  Util.cancelSelections(player);
 			} else if(args.length == 1 && args[0].equalsIgnoreCase("list")) { //list the painting options when given the proper arguments
 			  Util.listPaintings(player);
 			} else {

@@ -92,13 +92,13 @@ public class Util {
 	}
 	
 	// Remove a player's selection.
-	public static void cancelSelection(Player player) {
+	public static void removeSelection(Player player) {
 	  
 	  String playerName = player.getName();
 	  
 	  if(selections.containsKey(playerName) && selections.get(playerName).hasNext()) {
 	    selections.get(playerName).discardNewest();
-	    player.sendMessage(config.getString("messages.cancel"));
+	    player.sendMessage(config.getString("messages.remove"));
 	  } else {
 	    player.sendMessage(config.getString("messages.cancel-error"));
 	  }
@@ -106,8 +106,16 @@ public class Util {
 	}
 	
 	// Remove the player from the database.
-	public static void cancelAllSelections(Player player) {
-	  selections.remove(player.getName());
+	public static void cancelSelections(Player player) {
+	  
+	  String playerName = player.getName();
+	  
+	  if(selections.containsKey(playerName)) {
+	    selections.remove(player.getName());
+	    player.sendMessage(config.getString("messages.cancel"));
+	  } else {
+	    player.sendMessage(config.getString("messages.cancel-error"));
+	  }
 	}
 	
 	// Provide a player with a list of valid paintings.
