@@ -54,6 +54,6 @@ public class Events implements Listener {
 	// When a player disconnects.
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
-		Util.cancelAllSelections(event.getPlayer());
+		Util.cancelSelections(event.getPlayer());
 	}
 }

@@ -2,7 +2,8 @@ messages:
   select: "§aPainting selected."
   place: "§aPainting placed."
   
-  cancel: "§cSelection canceled."
+  remove: "§cPrevious selection canceled."
+  cancel: "§cAll selections canceled."
   list: "§cAvailable paintings: §6ALBAN, AZTEC, AZTEC2, BOMB, BURNINGSKULL, BUST, COURBET, CREEBET, DONKEYKONG, FIGHTERS, GRAHAM, KEBAB, MATCH, PIGSCENE, PLANT, POINTER, POOL, SEA, SKELETON, SKULL_AND_ROSES, STAGE, SUNSET, VOID, WANDERER, WASTELAND, WITHER "
   
   place-error: "§cThat painting is too big."
